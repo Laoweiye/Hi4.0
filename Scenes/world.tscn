@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cl8spl4cusj65"]
+[gd_scene load_steps=10 format=3 uid="uid://cl8spl4cusj65"]
 
 [sub_resource type="Gradient" id="Gradient_wv4md"]
 
@@ -6,30 +6,51 @@
 
 [sub_resource type="NoiseTexture" id="NoiseTexture_y8xhv"]
 seamless = true
-color_ramp = SubResource( "Gradient_wv4md" )
-noise = SubResource( "FastNoiseLite_u2efg" )
+color_ramp = SubResource("Gradient_wv4md")
+noise = SubResource("FastNoiseLite_u2efg")
 
 [sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_pcveb"]
-night_sky = SubResource( "NoiseTexture_y8xhv" )
+night_sky = SubResource("NoiseTexture_y8xhv")
 
 [sub_resource type="Sky" id="Sky_xoyti"]
-sky_material = SubResource( "PhysicalSkyMaterial_pcveb" )
+sky_material = SubResource("PhysicalSkyMaterial_pcveb")
 
 [sub_resource type="Environment" id="Environment_3whgj"]
 background_mode = 2
-sky = SubResource( "Sky_xoyti" )
+sky = SubResource("Sky_xoyti")
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_2bb2b"]
 size = Vector2(10, 10)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1y8l7"]
+albedo_color = Color(1, 0.666667, 0.705882, 1)
+metallic = 1.0
+roughness = 0.44
+
+[sub_resource type="TubeTrailMesh" id="TubeTrailMesh_3a0l5"]
+material = SubResource("StandardMaterial3D_1y8l7")
+radial_steps = 32
+sections = 8
+
 [node name="World" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource( "Environment_3whgj" )
+environment = SubResource("Environment_3whgj")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 4.67275, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.999988, -0.00457474, -0.00174363, 0.00457845, 0.999987, 0.00213013, 0.00173388, -0.00213808, 0.999996, 0, 0, 0)
-mesh = SubResource( "PlaneMesh_2bb2b" )
+mesh = SubResource("PlaneMesh_2bb2b")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-0.608764, 0.414525, -0.676444, 0, 0.85264, 0.522498, 0.793352, 0.318078, -0.519056, -2.34306, 2.26934, -1.93004)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
+shadow_enabled = true
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.995693, 0.550233, 0.000999093)
+mesh = SubResource("TubeTrailMesh_3a0l5")
