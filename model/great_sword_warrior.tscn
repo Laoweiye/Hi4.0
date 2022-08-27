@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://cg2sub31mi0i3"]
+
+[ext_resource type="PackedScene" uid="uid://dfkbvuweyxmsm" path="res://model/GreatSwordWarrior.blend" id="1_5ov2w"]
+
+[node name="GreatSwordWarrior" instance=ExtResource("1_5ov2w")]
+
+[node name="Maria_J_J_Ong" parent="Armature/Skeleton3D" index="0"]
+lod_bias = 76.034
+
+[node name="Maria_sword" parent="Armature/Skeleton3D" index="1"]
+lod_bias = 128.0
